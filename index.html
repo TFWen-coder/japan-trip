@@ -10,232 +10,157 @@
 :root {
   --navy:#0a1628; --navy2:#0d2137;
   --gold:#f5c842; --gold2:#e8902a;
-  --teal:#60d4f0;
+  --teal:#60d4f0; --green:#4caf82; --red:#e05c5c;
   --text:#e8f0f8; --dim:rgba(232,240,248,0.55);
   --land:#2a5c3a; --land2:#3a7050;
   --cbg:rgba(255,255,255,0.06); --cbord:rgba(255,255,255,0.11);
 }
-body {
-  font-family:'Noto Sans TC','Hiragino Sans',sans-serif;
-  background:var(--navy); color:var(--text);
-  overflow:hidden; height:100vh; width:100vw;
-}
+body { font-family:'Noto Sans TC','Hiragino Sans',sans-serif; background:var(--navy); color:var(--text); overflow:hidden; height:100vh; width:100vw; }
 
 /* ── INTRO ── */
-#intro {
-  position:fixed; inset:0;
-  background:radial-gradient(ellipse at 50% 40%, #1a3a5c 0%, #0a1628 70%);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  z-index:200; transition:opacity 1.2s ease;
-}
+#intro { position:fixed; inset:0; background:radial-gradient(ellipse at 50% 40%,#1a3a5c 0%,#0a1628 70%); display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:200; transition:opacity 1.2s ease; overflow-y:auto; }
 #intro.out { opacity:0; pointer-events:none; }
 #stars { position:absolute; inset:0; pointer-events:none; }
-.ic { position:relative; text-align:center; }
-.badge {
-  display:inline-block;
-  background:rgba(245,200,66,.12); border:1px solid rgba(245,200,66,.35);
-  color:var(--gold); padding:.35rem 1.4rem; border-radius:100px;
-  font-size:.8rem; letter-spacing:.3em; margin-bottom:1.4rem;
-  animation:up .8s ease .2s both;
-}
-.ititle {
-  font-size:clamp(2rem,5vw,3.2rem); font-weight:900; line-height:1.25;
-  animation:up .8s ease .4s both;
-}
+.ic { position:relative; text-align:center; padding:2rem 1rem; max-width:680px; width:100%; }
+.badge { display:inline-block; background:rgba(245,200,66,.12); border:1px solid rgba(245,200,66,.35); color:var(--gold); padding:.35rem 1.4rem; border-radius:100px; font-size:.8rem; letter-spacing:.3em; margin-bottom:1.2rem; animation:up .8s ease .2s both; }
+.ititle { font-size:clamp(1.8rem,4vw,3rem); font-weight:900; line-height:1.25; animation:up .8s ease .4s both; }
 .ititle span { color:var(--gold); }
-.isub {
-  font-size:.95rem; color:var(--dim); margin-top:.7rem;
-  letter-spacing:.2em; animation:up .8s ease .6s both;
-}
-.frow {
-  display:flex; gap:.7rem; justify-content:center; flex-wrap:wrap;
-  margin-top:1.8rem; animation:up .8s ease .8s both;
-}
-.ftag {
-  background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.13);
-  border-radius:100px; padding:.35rem .9rem; font-size:.82rem; color:var(--dim);
-}
-.rpreview {
-  display:flex; align-items:center; gap:.45rem; justify-content:center;
-  margin-top:2rem; font-size:.88rem; color:var(--dim);
-  animation:up .8s ease 1s both;
-}
+.idates { font-size:.95rem; color:var(--gold); margin-top:.5rem; letter-spacing:.15em; animation:up .8s ease .5s both; font-weight:500; }
+.isub { font-size:.88rem; color:var(--dim); margin-top:.4rem; letter-spacing:.15em; animation:up .8s ease .6s both; }
+.frow { display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap; margin-top:1.4rem; animation:up .8s ease .7s both; }
+.ftag { background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.13); border-radius:100px; padding:.3rem .85rem; font-size:.8rem; color:var(--dim); }
+
+/* Booking checklist on intro */
+.booking-panel { display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-top:1.4rem; animation:up .8s ease .8s both; text-align:left; }
+.bk-item { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:10px; padding:.6rem .8rem; font-size:.75rem; display:flex; align-items:flex-start; gap:.5rem; }
+.bk-item.done { border-color:rgba(76,175,130,.35); background:rgba(76,175,130,.07); }
+.bk-item.todo { border-color:rgba(245,200,66,.35); background:rgba(245,200,66,.07); }
+.bk-icon { font-size:1rem; flex-shrink:0; margin-top:.05rem; }
+.bk-text { flex:1; }
+.bk-title { font-weight:600; color:var(--text); margin-bottom:.1rem; font-size:.78rem; }
+.bk-sub { color:var(--dim); font-size:.72rem; line-height:1.4; }
+.bk-status { font-size:.65rem; font-weight:700; margin-top:.2rem; }
+.bk-item.done .bk-status { color:var(--green); }
+.bk-item.todo .bk-status { color:var(--gold); }
+
+.rpreview { display:flex; align-items:center; gap:.4rem; justify-content:center; margin-top:1.4rem; font-size:.85rem; color:var(--dim); animation:up .8s ease .9s both; flex-wrap:wrap; }
 .rpreview .cy { color:var(--gold); font-weight:500; }
 .rpreview .ar { opacity:.4; }
-.sbtn {
-  margin-top:2.2rem; padding:.95rem 2.8rem;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#0a1628; border:none; border-radius:100px;
-  font-size:1.05rem; font-weight:700; cursor:pointer;
-  animation:up .8s ease 1.2s both;
-  transition:transform .2s, box-shadow .2s;
-  font-family:inherit; letter-spacing:.05em;
-}
+.sbtn { margin-top:1.6rem; padding:.9rem 2.6rem; background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#0a1628; border:none; border-radius:100px; font-size:1rem; font-weight:700; cursor:pointer; animation:up .8s ease 1s both; transition:transform .2s,box-shadow .2s; font-family:inherit; letter-spacing:.05em; }
 .sbtn:hover { transform:scale(1.05) translateY(-2px); box-shadow:0 10px 35px rgba(245,200,66,.4); }
 
 /* ── MAIN ── */
-#main {
-  display:flex; height:100vh; opacity:0; pointer-events:none;
-  transition:opacity 1s ease;
-}
+#main { display:flex; height:100vh; opacity:0; pointer-events:none; transition:opacity 1s ease; }
 #main.on { opacity:1; pointer-events:all; }
 
 /* MAP */
-#mp {
-  width:42%; position:relative;
-  background:linear-gradient(180deg,#040d18 0%,#0a2040 100%);
-  display:flex; align-items:center; justify-content:center; overflow:hidden;
-}
-.mhdr {
-  position:absolute; top:1.1rem; left:0; right:0; text-align:center;
-  font-size:.7rem; letter-spacing:.25em; color:rgba(255,255,255,.25);
-}
-#mapsvg { width:100%; height:82%; max-width:370px; }
-
+#mp { width:42%; position:relative; background:linear-gradient(180deg,#040d18 0%,#0a2040 60%,#050e1a 100%); display:flex; flex-direction:column; align-items:center; overflow:hidden; }
+.mhdr { padding:.7rem 0 0; font-size:.68rem; letter-spacing:.22em; color:rgba(255,255,255,.22); text-align:center; flex-shrink:0; }
+.weather-strip { display:flex; justify-content:center; gap:.6rem; padding:.4rem .6rem; flex-shrink:0; flex-wrap:wrap; }
+.ws-badge { display:flex; align-items:center; gap:.3rem; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:100px; padding:.22rem .65rem; font-size:.68rem; color:var(--dim); white-space:nowrap; }
+.ws-badge .wt { color:var(--teal); font-weight:600; }
+#mapsvg { width:100%; flex:1; min-height:0; max-width:360px; }
 .isl { fill:var(--land); stroke:var(--land2); stroke-width:.7; }
 .isl-sm { fill:var(--land); stroke:var(--land2); stroke-width:.4; }
-
-.rflight {
-  fill:none; stroke:var(--gold); stroke-width:1.5;
-  stroke-dasharray:6 4; stroke-linecap:round;
-  opacity:0; filter:drop-shadow(0 0 4px rgba(245,200,66,.6));
-  transition:opacity .3s;
-}
-.rtrain {
-  fill:none; stroke:var(--teal); stroke-width:2;
-  stroke-linecap:round;
-  opacity:0; filter:drop-shadow(0 0 4px rgba(96,212,240,.55));
-  transition:opacity .3s;
-}
+.rflight { fill:none; stroke:var(--gold); stroke-width:1.5; stroke-dasharray:6 4; stroke-linecap:round; opacity:0; filter:drop-shadow(0 0 4px rgba(245,200,66,.6)); transition:opacity .3s; }
+.rtrain { fill:none; stroke:var(--teal); stroke-width:2; stroke-linecap:round; opacity:0; filter:drop-shadow(0 0 4px rgba(96,212,240,.55)); transition:opacity .3s; }
 .rtrain.ret { stroke:rgba(245,200,66,.8); }
-
-/* City dots */
-.cdot .ring {
-  fill:none; stroke:var(--gold); stroke-width:1; opacity:0;
-  transform-box:fill-box; transform-origin:center;
-}
-.cdot .dot {
-  fill:rgba(255,255,255,.18); stroke:rgba(255,255,255,.4); stroke-width:1;
-  transition:fill .4s, stroke .4s, stroke-width .3s;
-}
-.cdot text {
-  fill:rgba(255,255,255,.45); font-size:8.5px;
-  font-family:inherit; transition:fill .4s;
-}
+.cdot .ring { fill:none; stroke:var(--gold); stroke-width:1; opacity:0; transform-box:fill-box; transform-origin:center; }
+.cdot .dot { fill:rgba(255,255,255,.18); stroke:rgba(255,255,255,.4); stroke-width:1; transition:fill .4s,stroke .4s; }
+.cdot text { fill:rgba(255,255,255,.45); font-size:8.5px; font-family:inherit; transition:fill .4s; }
 .cdot.active .dot { fill:var(--gold); stroke:#fff; stroke-width:1.8; }
 .cdot.active text { fill:var(--gold); font-weight:700; font-size:9.5px; }
 .cdot.active .ring { animation:pulse 1.6s ease-out infinite; }
 .cdot.vis .dot { fill:rgba(245,200,66,.28); stroke:rgba(245,200,66,.55); }
 .cdot.vis text { fill:rgba(245,200,66,.6); }
+@keyframes pulse { 0%{r:7;opacity:.7;} 100%{r:20;opacity:0;} }
 
-@keyframes pulse {
-  0%   { r:7;  opacity:.7; }
-  100% { r:20; opacity:0; }
-}
+/* Info tabs at bottom of map */
+.info-panel { flex-shrink:0; width:100%; border-top:1px solid rgba(255,255,255,.07); }
+.itabs { display:flex; }
+.itab { flex:1; padding:.35rem .2rem; font-size:.66rem; text-align:center; cursor:pointer; color:var(--dim); border-bottom:2px solid transparent; transition:all .2s; background:none; border-top:none; border-left:none; border-right:none; font-family:inherit; }
+.itab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.icontents { position:relative; height:118px; overflow:hidden; }
+.icontent { position:absolute; inset:0; overflow-y:auto; padding:.45rem .85rem; opacity:0; pointer-events:none; transition:opacity .3s; }
+.icontent::-webkit-scrollbar { width:2px; }
+.icontent::-webkit-scrollbar-thumb { background:rgba(255,255,255,.15); }
+.icontent.active { opacity:1; pointer-events:all; }
+.irow { display:flex; align-items:flex-start; gap:.45rem; margin-bottom:.38rem; font-size:.71rem; line-height:1.45; }
+.irow-ico { flex-shrink:0; font-size:.9rem; }
+.irow-txt { color:var(--dim); }
+.irow-txt strong { color:var(--text); display:block; font-size:.75rem; }
+.todo-item { display:flex; align-items:center; gap:.5rem; margin-bottom:.45rem; font-size:.73rem; }
+.todo-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.todo-dot.done { background:var(--green); }
+.todo-dot.warn { background:var(--gold); }
+.todo-dot.alert { background:var(--red); }
+.todo-txt { color:var(--dim); line-height:1.4; }
+.todo-txt strong { color:var(--text); }
 
 /* CONTENT */
-#cp {
-  width:58%; display:flex; flex-direction:column;
-  background:linear-gradient(160deg,#0d1f35 0%,#0a1628 100%);
-  position:relative; overflow:hidden;
-}
-.pbar {
-  display:flex; align-items:center; gap:.45rem;
-  padding:1.4rem 2rem 0;
-}
-.pdot {
-  width:8px; height:8px; border-radius:50%;
-  background:rgba(255,255,255,.14); transition:background .4s, transform .3s;
-  cursor:pointer;
-}
+#cp { width:58%; display:flex; flex-direction:column; background:linear-gradient(160deg,#0d1f35 0%,#0a1628 100%); position:relative; overflow:hidden; }
+.pbar { display:flex; align-items:center; gap:.45rem; padding:1.2rem 1.8rem 0; }
+.pdot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.14); transition:background .4s,transform .3s; cursor:pointer; }
 .pdot.done { background:rgba(245,200,66,.45); }
 .pdot.active { background:var(--gold); transform:scale(1.45); }
-.plbl { margin-left:auto; font-size:.72rem; color:var(--dim); letter-spacing:.1em; }
+.plbl { margin-left:auto; font-size:.7rem; color:var(--dim); letter-spacing:.1em; }
 
 /* Cards */
-.carea { flex:1; position:relative; padding:.8rem 2rem; overflow:hidden; }
-.dcard {
-  position:absolute; inset:.8rem 0;
-  opacity:0; transform:translateX(55px);
-  transition:opacity .42s ease, transform .42s ease;
-  overflow-y:auto; padding-right:.4rem; pointer-events:none;
-  z-index:1;
-}
+.carea { flex:1; position:relative; padding:.7rem 1.8rem; overflow:hidden; }
+.dcard { position:absolute; inset:.7rem 0; opacity:0; transform:translateX(55px); transition:opacity .42s ease,transform .42s ease; overflow-y:auto; padding-right:.4rem; pointer-events:none; z-index:1; }
 .dcard::-webkit-scrollbar { width:3px; }
 .dcard::-webkit-scrollbar-thumb { background:rgba(255,255,255,.14); border-radius:2px; }
 .dcard.active { opacity:1; transform:none; pointer-events:all; z-index:5; }
 .dcard.exiting { z-index:2; pointer-events:none; }
 
-.dhdr { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.4rem; }
-.dico { font-size:2.4rem; line-height:1; flex-shrink:0; margin-top:.1rem; }
-.dlbl { font-size:.72rem; letter-spacing:.2em; color:var(--dim); margin-bottom:.15rem; }
-.dtitle { font-size:1.35rem; font-weight:700; line-height:1.3; }
-.dsub { font-size:.82rem; color:var(--dim); margin-top:.25rem; }
-.drte {
-  display:inline-flex; align-items:center; gap:.35rem;
-  background:rgba(245,200,66,.09); border:1px solid rgba(245,200,66,.22);
-  border-radius:100px; padding:.22rem .75rem;
-  font-size:.75rem; color:var(--gold); margin-top:.45rem;
-}
+.dhdr { display:flex; align-items:flex-start; gap:.9rem; margin-bottom:1.1rem; }
+.dico { font-size:2.2rem; line-height:1; flex-shrink:0; margin-top:.1rem; }
+.dlbl { font-size:.68rem; letter-spacing:.2em; color:var(--dim); margin-bottom:.1rem; }
+.ddate { font-size:.75rem; color:var(--gold); font-weight:500; margin-bottom:.1rem; }
+.dtitle { font-size:1.25rem; font-weight:700; line-height:1.3; }
+.dsub { font-size:.8rem; color:var(--dim); margin-top:.2rem; }
+.drte { display:inline-flex; align-items:center; gap:.35rem; background:rgba(245,200,66,.09); border:1px solid rgba(245,200,66,.22); border-radius:100px; padding:.2rem .7rem; font-size:.72rem; color:var(--gold); margin-top:.4rem; }
 
-.slist { display:flex; flex-direction:column; gap:.7rem; }
-.si { display:flex; gap:.9rem; align-items:flex-start; }
-.stime {
-  font-size:.72rem; color:var(--gold); font-weight:500;
-  width:3.2rem; flex-shrink:0; margin-top:.18rem; letter-spacing:.03em;
-}
-.sdesc {
-  flex:1; background:var(--cbg); border:1px solid var(--cbord);
-  border-radius:10px; padding:.62rem .9rem;
-  font-size:.82rem; line-height:1.58; color:var(--text);
-}
-.sdesc strong { color:var(--gold); display:block; margin-bottom:.18rem; font-size:.86rem; }
+.slist { display:flex; flex-direction:column; gap:.6rem; }
+.si { display:flex; gap:.8rem; align-items:flex-start; }
+.stime { font-size:.7rem; color:var(--gold); font-weight:500; width:3rem; flex-shrink:0; margin-top:.18rem; letter-spacing:.03em; }
+.sdesc { flex:1; background:var(--cbg); border:1px solid var(--cbord); border-radius:10px; padding:.55rem .85rem; font-size:.8rem; line-height:1.58; color:var(--text); }
+.sdesc strong { color:var(--gold); display:block; margin-bottom:.15rem; font-size:.83rem; }
 
-.tip {
-  background:rgba(96,212,240,.07); border:1px solid rgba(96,212,240,.18);
-  border-radius:10px; padding:.65rem .9rem;
-  font-size:.78rem; color:#a8d8ea; margin-top:.9rem; line-height:1.55;
-}
-.tip::before { content:"💡 "; }
+/* Hotel info box */
+.hotel-box { background:rgba(96,212,240,.07); border:1px solid rgba(96,212,240,.2); border-radius:10px; padding:.65rem .9rem; margin-top:.7rem; }
+.hotel-box-title { font-size:.7rem; color:var(--teal); letter-spacing:.15em; margin-bottom:.4rem; display:flex; align-items:center; gap:.35rem; }
+.hotel-name { font-size:.9rem; font-weight:700; color:var(--text); margin-bottom:.3rem; }
+.hotel-detail { font-size:.75rem; color:var(--dim); line-height:1.6; }
+.hotel-detail span { color:var(--text); }
 
-.sumcard {
-  background:linear-gradient(135deg,rgba(245,200,66,.09),rgba(245,200,66,.04));
-  border:1px solid rgba(245,200,66,.28); border-radius:14px;
-  padding:1.3rem; margin-top:1rem;
-}
-.sumcard h3 { color:var(--gold); font-size:1rem; margin-bottom:.85rem; }
-.mlist { display:flex; flex-direction:column; gap:.45rem; }
-.mitem { display:flex; align-items:center; gap:.55rem; font-size:.82rem; color:var(--dim); }
-.mitem::before { content:"★"; color:var(--gold); font-size:.65rem; flex-shrink:0; }
+/* Warning box */
+.warn-box { background:rgba(245,200,66,.07); border:1px solid rgba(245,200,66,.25); border-radius:10px; padding:.6rem .85rem; margin-top:.65rem; font-size:.78rem; line-height:1.55; }
+.warn-box::before { content:"⚠️ "; }
+.warn-box.book { color:#f5c842; }
+
+/* Winter tip */
+.tip { background:rgba(96,212,240,.07); border:1px solid rgba(96,212,240,.18); border-radius:10px; padding:.6rem .85rem; font-size:.76rem; color:#a8d8ea; margin-top:.65rem; line-height:1.55; }
+.tip::before { content:"❄️ "; }
+
+/* Summary card */
+.sumcard { background:linear-gradient(135deg,rgba(245,200,66,.09),rgba(245,200,66,.04)); border:1px solid rgba(245,200,66,.28); border-radius:14px; padding:1.2rem; margin-top:.8rem; }
+.sumcard h3 { color:var(--gold); font-size:.95rem; margin-bottom:.8rem; }
+.mlist { display:flex; flex-direction:column; gap:.42rem; }
+.mitem { display:flex; align-items:center; gap:.5rem; font-size:.8rem; color:var(--dim); }
+.mitem::before { content:"★"; color:var(--gold); font-size:.62rem; flex-shrink:0; }
 
 /* Controls */
-.ctrl {
-  display:flex; align-items:center; gap:.9rem;
-  padding:.9rem 2rem 1.4rem;
-  border-top:1px solid rgba(255,255,255,.06);
-}
-.cbtn {
-  padding:.55rem 1.3rem; border-radius:100px;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.06); color:var(--text);
-  font-size:.82rem; cursor:pointer; transition:all .2s;
-  font-family:inherit; white-space:nowrap;
-}
+.ctrl { display:flex; align-items:center; gap:.8rem; padding:.8rem 1.8rem 1.2rem; border-top:1px solid rgba(255,255,255,.06); }
+.cbtn { padding:.5rem 1.2rem; border-radius:100px; border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.06); color:var(--text); font-size:.8rem; cursor:pointer; transition:all .2s; font-family:inherit; white-space:nowrap; }
 .cbtn:hover { background:rgba(255,255,255,.11); border-color:rgba(255,255,255,.28); }
-.cbtn.pri {
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#0a1628; border:none; font-weight:700;
-}
+.cbtn.pri { background:linear-gradient(135deg,var(--gold),var(--gold2)); color:#0a1628; border:none; font-weight:700; }
 .cbtn.pri:hover { transform:scale(1.03); box-shadow:0 4px 18px rgba(245,200,66,.3); }
 .cbtn:disabled { opacity:.28; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
 .aprg { flex:1; height:2px; background:rgba(255,255,255,.09); border-radius:1px; overflow:hidden; }
 .apfill { height:100%; background:var(--gold); width:0%; border-radius:1px; }
 
-/* Animations */
-@keyframes up {
-  from { opacity:0; transform:translateY(18px); }
-  to   { opacity:1; transform:none; }
-}
+@keyframes up { from{opacity:0;transform:translateY(18px);} to{opacity:1;transform:none;} }
 </style>
 </head>
 <body>
@@ -246,7 +171,8 @@ body {
   <div class="ic">
     <div class="badge">✈ 2026 冬　家族旅行提案</div>
     <h1 class="ititle">日本・輕井澤<br><span>親子五人同行</span></h1>
-    <p class="isub">六天五夜　東京 × 輕井澤</p>
+    <div class="idates">1月12日（二）－ 1月17日（日）　六天五夜</div>
+    <p class="isub">東京 × 輕井澤 × 豐洲</p>
     <div class="frow">
       <span class="ftag">👨 爸爸</span>
       <span class="ftag">👩 媽媽</span>
@@ -254,11 +180,63 @@ body {
       <span class="ftag">👴 爺爺</span>
       <span class="ftag">👵 奶奶</span>
     </div>
+
+    <div class="booking-panel">
+      <div class="bk-item done">
+        <div class="bk-icon">🏨</div>
+        <div class="bk-text">
+          <div class="bk-title">karaksa hotel Tokyo Yaesu</div>
+          <div class="bk-sub">Day 1（1/12）入住</div>
+          <div class="bk-status">✅ 已訂</div>
+        </div>
+      </div>
+      <div class="bk-item done">
+        <div class="bk-icon">🏨</div>
+        <div class="bk-text">
+          <div class="bk-title">輕井澤皇家王子大飯店</div>
+          <div class="bk-sub">Day 2–3（1/13–15）2間</div>
+          <div class="bk-status">✅ 已訂　Ref: 43764SG069015</div>
+        </div>
+      </div>
+      <div class="bk-item done">
+        <div class="bk-icon">🏨</div>
+        <div class="bk-text">
+          <div class="bk-title">三井花園飯店豐洲普米爾</div>
+          <div class="bk-sub">Day 4–5（1/15–17）入住</div>
+          <div class="bk-status">✅ 已訂</div>
+        </div>
+      </div>
+      <div class="bk-item todo">
+        <div class="bk-icon">🚄</div>
+        <div class="bk-text">
+          <div class="bk-title">新幹線綠色車廂</div>
+          <div class="bk-sub">1/13 東京→輕井澤<br>1/15 輕井澤→東京</div>
+          <div class="bk-status">⚠️ 尚未訂票</div>
+        </div>
+      </div>
+      <div class="bk-item todo">
+        <div class="bk-icon">🎭</div>
+        <div class="bk-text">
+          <div class="bk-title">KidZania Tokyo 門票</div>
+          <div class="bk-sub">1/16（六）週末場次<br>建議提前線上購票</div>
+          <div class="bk-status">⚠️ 尚未購票</div>
+        </div>
+      </div>
+      <div class="bk-item todo">
+        <div class="bk-icon">✈️</div>
+        <div class="bk-text">
+          <div class="bk-title">機票確認</div>
+          <div class="bk-sub">1/12 高雄→成田 08:00起<br>1/17 成田→高雄 13:00</div>
+          <div class="bk-status">⚠️ 請確認座位</div>
+        </div>
+      </div>
+    </div>
+
     <div class="rpreview">
       <span class="cy">高雄</span><span class="ar">──✈──</span>
-      <span class="cy">東京</span><span class="ar">──🚄──</span>
+      <span class="cy">東京・上野</span><span class="ar">──🚄──</span>
       <span class="cy">輕井澤</span><span class="ar">──🚄──</span>
-      <span class="cy">東京</span><span class="ar">──✈──</span>
+      <span class="cy">東京・豐洲</span><span class="ar">──✈──</span>
       <span class="cy">高雄</span>
     </div>
     <button class="sbtn" onclick="startTrip()">展開旅程 →</button>
@@ -271,68 +249,91 @@ body {
   <!-- MAP PANEL -->
   <div id="mp">
     <div class="mhdr">日本・台灣　路線圖</div>
-    <svg id="mapsvg" viewBox="0 0 400 520" xmlns="http://www.w3.org/2000/svg">
+    <div class="weather-strip">
+      <div class="ws-badge">❄️ 東京 <span class="wt">3–8°C</span></div>
+      <div class="ws-badge">🌨 輕井澤 <span class="wt">-10–0°C</span></div>
+      <div class="ws-badge">☀️ 1月 <span class="wt">晴多 少雨</span></div>
+    </div>
+    <svg id="mapsvg" viewBox="0 0 400 420" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
           <path d="M28 0L0 0 0 28" fill="none" stroke="rgba(255,255,255,.025)" stroke-width=".5"/>
         </pattern>
-        <filter id="gl"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
       </defs>
-      <rect width="400" height="520" fill="url(#grid)"/>
-
+      <rect width="400" height="420" fill="url(#grid)"/>
       <!-- Taiwan -->
-      <path class="isl" d="M34,464 C30,452 27,440 30,428 C33,418 40,414 46,420 C50,428 48,442 43,456 C40,463 36,468 34,464 Z"/>
-
+      <path class="isl" d="M34,374 C30,362 27,350 30,338 C33,328 40,324 46,330 C50,338 48,352 43,366 C40,373 36,378 34,374 Z"/>
       <!-- Ryukyu chain -->
-      <circle class="isl-sm" cx="72" cy="440" r="4"/>
-      <circle class="isl-sm" cx="92" cy="424" r="3.5"/>
-      <circle class="isl-sm" cx="112" cy="408" r="4"/>
-      <circle class="isl-sm" cx="132" cy="394" r="3"/>
-      <circle class="isl-sm" cx="148" cy="380" r="3"/>
-      <circle class="isl-sm" cx="162" cy="368" r="2.5"/>
-
+      <circle class="isl-sm" cx="72" cy="352" r="4"/>
+      <circle class="isl-sm" cx="92" cy="336" r="3.5"/>
+      <circle class="isl-sm" cx="112" cy="320" r="4"/>
+      <circle class="isl-sm" cx="132" cy="306" r="3"/>
+      <circle class="isl-sm" cx="148" cy="292" r="3"/>
+      <circle class="isl-sm" cx="162" cy="280" r="2.5"/>
       <!-- Kyushu -->
-      <path class="isl" d="M176,258 C182,240 200,233 216,240 C229,246 232,263 224,278 C216,293 198,300 184,292 C170,284 168,270 176,258 Z"/>
-
+      <path class="isl" d="M176,168 C182,150 200,143 216,150 C229,156 232,173 224,188 C216,203 198,210 184,202 C170,194 168,180 176,168 Z"/>
       <!-- Shikoku -->
-      <path class="isl" d="M224,272 C233,258 250,254 263,262 C271,273 264,289 248,293 C232,297 218,286 224,272 Z"/>
-
-      <!-- Honshu (main diagonal band) -->
-      <path class="isl" d="M195,256 C214,243 238,230 262,220 C282,212 302,205 320,199 C332,194 342,184 344,168 C346,152 340,132 330,114 C322,99 314,90 308,88 C305,95 310,112 314,130 C318,150 316,168 308,182 C300,194 286,202 268,210 C246,220 220,232 200,248 Z"/>
-
+      <path class="isl" d="M224,182 C233,168 250,164 263,172 C271,183 264,199 248,203 C232,207 218,196 224,182 Z"/>
+      <!-- Honshu -->
+      <path class="isl" d="M195,166 C214,153 238,140 262,130 C282,122 302,115 320,109 C332,104 342,94 344,78 C346,62 340,42 330,24 C322,9 314,0 308,-2 C305,5 310,22 314,40 C318,60 316,78 308,92 C300,104 286,112 268,120 C246,130 220,142 200,158 Z"/>
       <!-- Hokkaido -->
-      <path class="isl" d="M296,82 C312,62 336,56 358,66 C372,76 376,96 362,112 C348,126 328,130 312,120 C296,110 284,98 296,82 Z"/>
+      <path class="isl" d="M296,-8 C312,-28 336,-34 358,-24 C372,-14 376,6 362,22 C348,36 328,40 312,30 C296,20 284,8 296,-8 Z"/>
 
-      <!-- ── ROUTES ── -->
-      <!-- Flight KH → Tokyo -->
-      <path id="r1" class="rflight" d="M38,458 Q 175,320 319,210"/>
-      <!-- Train Tokyo → Karuizawa -->
-      <path id="r2" class="rtrain"  d="M319,210 L 299,193"/>
-      <!-- Train Karuizawa → Tokyo (return) -->
-      <path id="r3" class="rtrain ret" d="M299,193 L 319,210"/>
-      <!-- Flight Tokyo → KH (return) -->
-      <path id="r4" class="rflight" d="M319,210 Q 175,346 38,458"/>
+      <!-- ROUTES -->
+      <path id="r1" class="rflight" d="M38,368 Q 175,230 319,120"/>
+      <path id="r2" class="rtrain"  d="M319,120 L 299,103"/>
+      <path id="r3" class="rtrain ret" d="M299,103 L 319,120"/>
+      <path id="r4" class="rflight" d="M319,120 Q 175,256 38,368"/>
 
-      <!-- ── CITIES ── -->
-      <!-- Kaohsiung -->
-      <g id="c-kh" class="cdot active" transform="translate(38,458)">
+      <!-- CITIES -->
+      <g id="c-kh" class="cdot active" transform="translate(38,368)">
         <circle class="ring" r="7"/>
         <circle class="dot" r="5"/>
         <text y="-11" text-anchor="middle">高雄</text>
       </g>
-      <!-- Tokyo -->
-      <g id="c-tky" class="cdot" transform="translate(319,210)">
+      <g id="c-tky" class="cdot" transform="translate(319,120)">
         <circle class="ring" r="7"/>
         <circle class="dot" r="5"/>
         <text y="-11" text-anchor="middle">東京</text>
+        <text y="-22" text-anchor="middle" fill="rgba(96,212,240,.55)" font-size="7px">3–8°C</text>
       </g>
-      <!-- Karuizawa -->
-      <g id="c-kiz" class="cdot" transform="translate(299,193)">
+      <g id="c-kiz" class="cdot" transform="translate(299,103)">
         <circle class="ring" r="7"/>
         <circle class="dot" r="5"/>
-        <text x="3" y="-10" text-anchor="start">輕井澤</text>
+        <text x="4" y="-9" text-anchor="start">輕井澤</text>
+        <text x="4" y="-19" text-anchor="start" fill="rgba(96,212,240,.55)" font-size="7px">-10–0°C</text>
       </g>
     </svg>
+
+    <!-- INFO TABS -->
+    <div class="info-panel">
+      <div class="itabs">
+        <button class="itab active" onclick="showTab(0)">📋 預訂清單</button>
+        <button class="itab" onclick="showTab(1)">☕ 美食推薦</button>
+        <button class="itab" onclick="showTab(2)">🗾 旅遊小知識</button>
+      </div>
+      <div class="icontents">
+        <!-- Tab 0: Booking -->
+        <div class="icontent active" id="tab0">
+          <div class="todo-item"><div class="todo-dot done"></div><div class="todo-txt"><strong>karaksa hotel Tokyo Yaesu</strong>　Day 1 已訂</div></div>
+          <div class="todo-item"><div class="todo-dot done"></div><div class="todo-txt"><strong>輕井澤皇家王子大飯店</strong>　Day 2–3 已訂 Ref: 43764SG069015</div></div>
+          <div class="todo-item"><div class="todo-dot done"></div><div class="todo-txt"><strong>三井花園飯店豐洲普米爾</strong>　Day 4–5 已訂</div></div>
+          <div class="todo-item"><div class="todo-dot warn"></div><div class="todo-txt"><strong>新幹線綠色車廂</strong>　1/13 &amp; 1/15　尚未訂票 ⚠️</div></div>
+          <div class="todo-item"><div class="todo-dot warn"></div><div class="todo-txt"><strong>KidZania Tokyo 門票</strong>　1/16（六）週末　尚未購票 ⚠️</div></div>
+        </div>
+        <!-- Tab 1: Food & Coffee (dynamic) -->
+        <div class="icontent" id="tab1">
+          <div id="food-content"></div>
+        </div>
+        <!-- Tab 2: Japan tips -->
+        <div class="icontent" id="tab2">
+          <div class="irow"><div class="irow-ico">🚇</div><div class="irow-txt"><strong>Suica/PASMO</strong>交通IC卡，抵達成田即可購買，全程通用</div></div>
+          <div class="irow"><div class="irow-ico">💴</div><div class="irow-txt"><strong>帶現金</strong>日本仍多現金交易，小店常不刷卡，準備日幣</div></div>
+          <div class="irow"><div class="irow-ico">🏪</div><div class="irow-txt"><strong>便利商店</strong>7-11、Family Mart 可取暖、買熱食、充電</div></div>
+          <div class="irow"><div class="irow-ico">🗑️</div><div class="irow-txt"><strong>垃圾</strong>街上少垃圾桶，垃圾請帶回飯店處理</div></div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- CONTENT PANEL -->
@@ -355,19 +356,28 @@ body {
           <div class="dico">✈️</div>
           <div>
             <div class="dlbl">DAY 1</div>
-            <div class="dtitle">吉祥寺慢生活日</div>
-            <div class="dsub">抵達東京，輕鬆開始</div>
+            <div class="ddate">1月12日（週二）</div>
+            <div class="dtitle">上野慢生活日</div>
+            <div class="dsub">抵達東京，就地散步</div>
             <div class="drte">✈ 高雄 → 東京（成田）</div>
           </div>
         </div>
         <div class="slist">
           <div class="si"><div class="stime">08:00</div><div class="sdesc"><strong>高雄出發</strong>搭機起飛，前往東京成田機場</div></div>
-          <div class="si"><div class="stime">12:10</div><div class="sdesc"><strong>抵達成田機場</strong>入境後搭電車前往市區，寄放行李（建議住吉祥寺或新宿西側）</div></div>
-          <div class="si"><div class="stime">下午</div><div class="sdesc"><strong>井之頭公園 🦢</strong>散步、搭天鵝船，感受東京在地家庭生活氣氛。若女兒還有體力，可順路到井之頭自然文化園看小動物</div></div>
-          <div class="si"><div class="stime">傍晚</div><div class="sdesc"><strong>吉祥寺商店街</strong>逛文具店、雜貨店、麵包店，享受悠閒氣氛</div></div>
-          <div class="si"><div class="stime">晚餐</div><div class="sdesc"><strong>晚餐選擇</strong>日式洋食、漢堡排或居酒屋式家庭餐廳，以舒服慢走為主，早點休息</div></div>
+          <div class="si"><div class="stime">12:10</div><div class="sdesc"><strong>抵達成田 → 飯店 Check-in</strong>搭電車入市區，karaksa hotel colors Tokyo Yaesu 辦理入住，寄放行李出發</div></div>
+          <div class="si"><div class="stime">下午</div><div class="sdesc"><strong>上野恩賜公園 🦢 天鵝船</strong>輕鬆開始，讓女兒在湖邊玩耍，長輩散步賞景</div></div>
+          <div class="si"><div class="stime">步行5分</div><div class="sdesc"><strong>2k540 AKI-OKA ARTISAN</strong>高架橋下的職人街，文具、皮革、手作小物，文青感十足 ✂️</div></div>
+          <div class="si"><div class="stime">咖啡</div><div class="sdesc"><strong>SHELVES COFFEE</strong>補充咖啡能量，讓長輩休息片刻 ☕</div></div>
+          <div class="si"><div class="stime">步行15分</div><div class="sdesc"><strong>谷中銀座 ⭐ 隱藏亮點</strong>老屋、豆腐店、手工小舖，到處亂走的貓咪。離上野步行15分，文青感極強，孩子也會愛這種老街生活感 🐱</div></div>
+          <div class="si"><div class="stime">傍晚</div><div class="sdesc"><strong>淺草寺＋仲見世通</strong>傍晚人潮退，拍照好看。朱紅燈籠夜晚更美 🏮</div></div>
+          <div class="si"><div class="stime">晚餐</div><div class="sdesc"><strong>晴空塔 Solamachi</strong>樓上餐廳可邊吃邊欣賞夜景，收尾完美 🌃</div></div>
         </div>
-        <div class="tip">第一天不安排密集行程，以輕鬆適應時差為主。長輩與女兒都能按自己的步調享受吉祥寺。</div>
+        <div class="tip">1月東京約 3–8°C，出門備厚外套、圍巾、手套。天鵝船低溫時可能縮短營業，出發前確認。淺草寺傍晚風大，多帶一層。</div>
+        <div class="hotel-box">
+          <div class="hotel-box-title">🏨 今晚住宿</div>
+          <div class="hotel-name">karaksa hotel colors Tokyo Yaesu</div>
+          <div class="hotel-detail">位置：<span>東京都中央区八重洲2丁目，近東京車站八重洲口步行約5分</span><br>備註：<span>隔天需搭新幹線前往輕井澤，八重洲出口即可步行至東京車站</span></div>
+        </div>
       </div>
 
       <!-- DAY 2 -->
@@ -376,18 +386,29 @@ body {
           <div class="dico">🚄</div>
           <div>
             <div class="dlbl">DAY 2</div>
+            <div class="ddate">1月13日（週三）</div>
             <div class="dtitle">進入森林與雪的節奏</div>
-            <div class="dsub">雪景初見，泡湯入夢</div>
-            <div class="drte">🚄 東京 → 輕井澤（新幹線）</div>
+            <div class="dsub">搭新幹線，初見輕井澤</div>
+            <div class="drte">🚄 東京 → 輕井澤（北陸新幹線）</div>
           </div>
         </div>
         <div class="slist">
-          <div class="si"><div class="stime">上午</div><div class="sdesc"><strong>搭乘新幹線 🚄</strong>建議選擇舒適的綠色車廂，欣賞窗外從都市到山林的景色變化</div></div>
-          <div class="si"><div class="stime">抵達後</div><div class="sdesc"><strong>輕井澤王子飯店</strong>先至飯店寄放行李，整頓後輕鬆出發探索</div></div>
-          <div class="si"><div class="stime">下午</div><div class="sdesc"><strong>Prince Shopping Plaza 🛍️</strong>outlet 悠閒散步，孩子可在草地與山景空間中自由跑跳，享受美麗雪景</div></div>
+          <div class="si"><div class="stime">上午</div><div class="sdesc"><strong>搭乘新幹線 あさま号</strong>從東京車站出發，約1小時抵達輕井澤。建議訂綠色車廂（グリーン車），寬敞舒適適合長輩 🚄</div></div>
+          <div class="si"><div class="stime">抵達後</div><div class="sdesc"><strong>輕井澤皇家王子大飯店 Check-in</strong>辦理入住，稍作休息後出發探索</div></div>
+          <div class="si"><div class="stime">下午</div><div class="sdesc"><strong>Prince Shopping Plaza 🛍️</strong>outlet 悠閒散步，孩子可在草地與山景空間自由跑跳，享受白雪美景</div></div>
           <div class="si"><div class="stime">晚上</div><div class="sdesc"><strong>飯店溫泉 ♨️</strong>泡湯放鬆，讓身體暖和，為明天雪地體驗做準備</div></div>
         </div>
-        <div class="tip">輕井澤王子飯店設施齊全，長輩可在飯店休息，大人陪女兒外出，行程非常彈性。</div>
+        <div class="warn-box book">新幹線綠色車廂（グリーン車）需額外購票，建議提早在 JR 官網或 Klook 訂位，旺季座位搶手。</div>
+        <div class="tip">輕井澤1月約 -10–0°C，比東京冷很多。下新幹線後立刻感受到溫差，請備妥羽絨外套和保暖配件。</div>
+        <div class="hotel-box">
+          <div class="hotel-box-title">🏨 今晚住宿（Day 2–3）</div>
+          <div class="hotel-name">輕井澤皇家王子大飯店</div>
+          <div class="hotel-detail">
+            訂房編號：<span>43764SG069015</span><br>
+            房型：<span>森林雙床房　禁煙客房</span><br>
+                        入住：<span>1月13日　退房：1月15日</span>
+          </div>
+        </div>
       </div>
 
       <!-- DAY 3 -->
@@ -396,18 +417,24 @@ body {
           <div class="dico">⛄</div>
           <div>
             <div class="dlbl">DAY 3</div>
+            <div class="ddate">1月14日（週四）</div>
             <div class="dtitle">親子雪地體驗日</div>
             <div class="dsub">全日輕井澤，放肆玩雪</div>
             <div class="drte">📍 Karuizawa Prince Snow Resort</div>
           </div>
         </div>
         <div class="slist">
-          <div class="si"><div class="stime">上午</div><div class="sdesc"><strong>雪地樂園 ❄️⛄</strong>玩雪盆、堆雪人，讓女兒盡情在雪地中奔跑玩耍，爺爺奶奶拍照應援</div></div>
-          <div class="si"><div class="stime">中午</div><div class="sdesc"><strong>回飯店午休</strong>中午務必讓孩子充分休息，長輩也趁機補眠，下午才有體力繼續</div></div>
-          <div class="si"><div class="stime">下午</div><div class="sdesc"><strong>視體力決定</strong>可繼續玩雪橇或嘗試初學者滑雪體驗，也可在飯店附近輕鬆賞雪散步</div></div>
-          <div class="si"><div class="stime">晚餐</div><div class="sdesc"><strong>飯店內用餐</strong>玩雪消耗體力多，今晚直接在飯店享用晚餐，不需外出</div></div>
+          <div class="si"><div class="stime">上午</div><div class="sdesc"><strong>雪地樂園 ❄️⛄</strong>玩雪盆、堆雪人，讓女兒盡情在雪地奔跑玩耍，爺爺奶奶拍照應援</div></div>
+          <div class="si"><div class="stime">中午</div><div class="sdesc"><strong>回飯店午休</strong>務必讓孩子充分休息，長輩也趁機補眠，下午才有體力繼續</div></div>
+          <div class="si"><div class="stime">下午</div><div class="sdesc"><strong>視體力決定</strong>可繼續玩雪橇或嘗試初學者滑雪，也可在飯店附近輕鬆賞雪散步</div></div>
+          <div class="si"><div class="stime">晚餐</div><div class="sdesc"><strong>飯店內用餐</strong>玩雪消耗體力多，今晚直接在飯店享用晚餐 🍽️</div></div>
         </div>
-        <div class="tip">記得備齊手套、雪靴、厚外套。女兒玩完雪後要立刻換上乾衣服，避免著涼。</div>
+        <div class="tip">雪地溫度可能低至 -10°C，請做足保暖：頭套、手套、雪靴缺一不可。女兒玩雪後立刻換乾衣服。雪地反射紫外線強，建議薄層防曬。</div>
+        <div class="hotel-box">
+          <div class="hotel-box-title">🏨 今晚住宿（續住）</div>
+          <div class="hotel-name">輕井澤皇家王子大飯店</div>
+          <div class="hotel-detail">訂房編號：<span>43764SG069015</span>　房型：<span>森林雙床房　禁煙</span><br>明日退房後搭新幹線返回東京</div>
+        </div>
       </div>
 
       <!-- DAY 4 -->
@@ -416,18 +443,25 @@ body {
           <div class="dico">🚲</div>
           <div>
             <div class="dlbl">DAY 4</div>
+            <div class="ddate">1月15日（週五）</div>
             <div class="dtitle">冬季森林慢旅行</div>
-            <div class="dsub">騎遊輕井澤，返回東京</div>
+            <div class="dsub">騎遊或散步輕井澤，返回東京</div>
             <div class="drte">🚄 輕井澤 → 東京（豐洲）</div>
           </div>
         </div>
         <div class="slist">
-          <div class="si"><div class="stime">上午</div><div class="sdesc"><strong>租借電動腳踏車 🚲</strong>騎遊路線：雲場池 → 舊輕井澤銀座 → 森林小路 → 咖啡店 ☕，感受冬日森林靜謐之美</div></div>
-          <div class="si"><div class="stime">午餐</div><div class="sdesc"><strong>川上庵 / SAWAMURA</strong>推薦川上庵手打蕎麥麵，或 SAWAMURA 現烤麵包配熱湯</div></div>
-          <div class="si"><div class="stime">下午</div><div class="sdesc"><strong>搭新幹線回東京 🚄</strong>這晚改住豐洲或東京灣區附近飯店，為隔天 KidZania 做準備</div></div>
-          <div class="si"><div class="stime">傍晚</div><div class="sdesc"><strong>安頓豐洲</strong>輕鬆入住，提前告訴女兒明天的驚喜計劃 🎭</div></div>
+          <div class="si"><div class="stime">上午</div><div class="sdesc"><strong>電動腳踏車（或步行）🚲</strong>騎遊路線：雲場池 → 舊輕井澤銀座 → 森林小路 → 咖啡店 ☕<br>若路面結冰不好騎，改步行賞雪也非常美</div></div>
+          <div class="si"><div class="stime">午餐</div><div class="sdesc"><strong>川上庵 / SAWAMURA</strong>川上庵手打蕎麥麵，或 SAWAMURA 現烤麵包配熱湯</div></div>
+          <div class="si"><div class="stime">下午</div><div class="sdesc"><strong>搭新幹線回東京 🚄</strong>退房後直接前往車站，提前確認班次時間</div></div>
+          <div class="si"><div class="stime">傍晚</div><div class="sdesc"><strong>三井花園飯店豐洲 Check-in</strong>安頓後輕鬆休息，提前告訴女兒明天 KidZania 的驚喜 🎭</div></div>
         </div>
-        <div class="tip">雲場池即使在冬天也美麗，若結冰更有特別感。電動腳踏車長輩也能輕鬆騎乘。</div>
+        <div class="warn-box book">1月輕井澤路面可能結冰（-10°C），騎腳踏車需謹慎。建議早上出門前確認路況，若結冰嚴重，步行遊覽雲場池同樣美麗。</div>
+        <div class="tip">雲場池若結冰，冰面反光極美，是輕井澤冬日限定風景。記得穿防滑雪靴。</div>
+        <div class="hotel-box">
+          <div class="hotel-box-title">🏨 今晚住宿（Day 4–5）</div>
+          <div class="hotel-name">三井花園飯店豐洲普米爾（Mitsui Garden Hotel Toyosu Premier）</div>
+          <div class="hotel-detail">位置：<span>東京都江東区豐洲，靠近 KidZania Tokyo 及 LaLaport Toyosu</span><br>入住：<span>1月15日　退房：1月17日</span></div>
+        </div>
       </div>
 
       <!-- DAY 5 -->
@@ -436,16 +470,24 @@ body {
           <div class="dico">🎭</div>
           <div>
             <div class="dlbl">DAY 5</div>
+            <div class="ddate">1月16日（週六）</div>
             <div class="dtitle">角色扮演放電日</div>
-            <div class="dsub">東京・豐洲，全力玩耍</div>
-            <div class="drte">📍 KidZania Tokyo</div>
+            <div class="dsub">東京・豐洲，週末全力玩耍</div>
+            <div class="drte">📍 KidZania Tokyo（豐洲）</div>
           </div>
         </div>
         <div class="slist">
-          <div class="si"><div class="stime">全日</div><div class="sdesc"><strong>KidZania Tokyo 🏥🚒🍣✈️</strong>角色扮演體驗！建議讓女兒慢慢玩幾個有興趣的職業：<br>👩‍⚕️ 醫生・🚒 消防員・🍣 壽司師傅・✈️ 飛行員</div></div>
-          <div class="si"><div class="stime">傍晚</div><div class="sdesc"><strong>LaLaport Toyosu 🌃</strong>用晚餐、悠閒散步，欣賞東京灣美麗夜景，讓長輩也有舒適休息的機會</div></div>
+          <div class="si"><div class="stime">早</div><div class="sdesc"><strong>提早到場！⚠️ 週六人潮多</strong>建議開館前30分抵達排隊，熱門職業（醫生、飛行員）開館後立刻預約</div></div>
+          <div class="si"><div class="stime">全日</div><div class="sdesc"><strong>KidZania Tokyo 🏥🚒🍣✈️</strong>讓女兒慢慢玩有興趣的職業：<br>👩‍⚕️ 醫生・🚒 消防員・🍣 壽司師傅・✈️ 飛行員<br>爺爺奶奶坐觀眾席看孫女「工作」，超溫馨 💛</div></div>
+          <div class="si"><div class="stime">傍晚</div><div class="sdesc"><strong>LaLaport Toyosu 🌃</strong>用晚餐、悠閒散步，欣賞東京灣夜景，讓長輩也有舒適休息的空間</div></div>
         </div>
-        <div class="tip">KidZania 建議開館前排隊入場，熱門職業要盡早選。爺爺奶奶可坐觀眾席看孫女「工作」，非常溫馨 💛</div>
+        <div class="warn-box book">KidZania 需事先線上購票，週六場次常常提前售罄。建議至 KidZania 官網或 Klook 購買，並提前確認入場時間。</div>
+        <div class="tip">1月室內活動很適合冬天，KidZania 全程室內無需擔心天氣。帶一件薄外套以備室內冷氣偏強。</div>
+        <div class="hotel-box">
+          <div class="hotel-box-title">🏨 今晚住宿（續住）</div>
+          <div class="hotel-name">三井花園飯店豐洲普米爾</div>
+          <div class="hotel-detail">明日早上退房，前往成田機場搭13:00班機</div>
+        </div>
       </div>
 
       <!-- DAY 6 -->
@@ -454,19 +496,23 @@ body {
           <div class="dico">🏡</div>
           <div>
             <div class="dlbl">DAY 6</div>
+            <div class="ddate">1月17日（週日）</div>
             <div class="dtitle">溫馨收尾，歸途</div>
-            <div class="dsub">帶著美好的回憶飛回家</div>
-            <div class="drte">✈ 東京（成田）→ 高雄</div>
+            <div class="dsub">下午一點班機，帶著回憶飛回家</div>
+            <div class="drte">✈ 東京（成田）→ 高雄　13:00</div>
           </div>
         </div>
         <div class="slist">
-          <div class="si"><div class="stime">早班機</div><div class="sdesc"><strong>前往成田機場 ✈️</strong>預留充足時間，悠閒辦理登機，免稅店採購最後伴手禮 🎁</div></div>
-          <div class="si"><div class="stime">返程</div><div class="sdesc"><strong>回到高雄 🌸</strong>帶著一箱行李和滿滿回憶，圓滿完成家族五人旅行</div></div>
+          <div class="si"><div class="stime">早上</div><div class="sdesc"><strong>退房、前往成田機場</strong>13:00 班機建議 09:00–09:30 出發前往機場，預留充足時間</div></div>
+          <div class="si"><div class="stime">機場</div><div class="sdesc"><strong>免稅店採購 🛍️</strong>辦完登機後悠閒逛免稅，採購最後伴手禮、零食、藥粧</div></div>
+          <div class="si"><div class="stime">13:00</div><div class="sdesc"><strong>起飛！回高雄 🌸</strong>帶著一箱行李和滿滿回憶，圓滿完成家族五人旅行</div></div>
         </div>
+        <div class="tip">從豐洲搭地鐵到成田約 80–90 分鐘，務必預留充足時間，避免趕機。</div>
         <div class="sumcard">
           <h3>✨ 這趟旅行的美好時刻</h3>
           <div class="mlist">
-            <div class="mitem">井之頭公園的天鵝船，女兒的笑聲</div>
+            <div class="mitem">上野天鵝船，女兒的笑聲映在湖面</div>
+            <div class="mitem">谷中銀座的貓咪，在老街轉角相遇</div>
             <div class="mitem">輕井澤第一次看見真正的大雪</div>
             <div class="mitem">堆雪人，爺爺奶奶也加入幫忙</div>
             <div class="mitem">森林小路騎車，咖啡店裡喝熱飲</div>
@@ -488,173 +534,164 @@ body {
 </div><!-- /main -->
 
 <script>
-/* ── Stars ── */
+/* Stars */
 (function(){
-  const c=document.getElementById('stars'), ctx=c.getContext('2d');
-  function resize(){ c.width=innerWidth; c.height=innerHeight; } resize();
+  const c=document.getElementById('stars'),ctx=c.getContext('2d');
+  function resize(){c.width=innerWidth;c.height=innerHeight;} resize();
   window.addEventListener('resize',resize);
-  const s=Array.from({length:130},()=>({
-    x:Math.random(), y:Math.random(),
-    r:.3+Math.random()*1.4, ph:Math.random()*Math.PI*2, sp:.5+Math.random()*1.5
-  }));
+  const s=Array.from({length:130},()=>({x:Math.random(),y:Math.random(),r:.3+Math.random()*1.4,ph:Math.random()*Math.PI*2,sp:.5+Math.random()*1.5}));
   let t=0;
   (function loop(){
     ctx.clearRect(0,0,c.width,c.height);
     s.forEach(a=>{
       const b=.25+.75*Math.sin(a.ph+t*a.sp*.01);
-      ctx.beginPath(); ctx.arc(a.x*c.width,a.y*c.height,a.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,255,255,${b})`; ctx.fill();
+      ctx.beginPath();ctx.arc(a.x*c.width,a.y*c.height,a.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${b})`;ctx.fill();
     });
-    t++; requestAnimationFrame(loop);
+    t++;requestAnimationFrame(loop);
   })();
 })();
 
-/* ── State ── */
-let cur=0, playing=false, timer=null;
-const DUR=6000;
+/* Info tabs */
+function showTab(i){
+  document.querySelectorAll('.itab').forEach((t,idx)=>t.classList.toggle('active',idx===i));
+  document.querySelectorAll('.icontent').forEach((c,idx)=>c.classList.toggle('active',idx===i));
+}
 
-/* Route config per day */
+/* Day-specific food recommendations */
+const FOOD=[
+  // Day 1 — 上野・谷中・淺草・晴空塔
+  [{ico:'☕',n:'SHELVES COFFEE',d:'御徒町，工業風選豆咖啡，到上野暖身必喝'},
+   {ico:'🍡',n:'谷中銀座 小吃',d:'コロッケ、メンチカツ，老街邊走邊吃'},
+   {ico:'🍮',n:'仲見世通 甘味',d:'人形燒、草餅、雷おこし，淺草必嚐'},
+   {ico:'🍽️',n:'晴空塔 Solamachi',d:'高層餐廳邊吃邊賞夜景，完美收尾'}],
+  // Day 2 — 輕井澤抵達
+  [{ico:'☕',n:'丸山珈琲 本店',d:'日本精品咖啡代表，輕井澤本店必喝'},
+   {ico:'🍞',n:'SAWAMURA',d:'天然酵母現烤麵包，抵達後午餐首選'},
+   {ico:'🍽️',n:'Prince Hotel 餐廳',d:'疲憊抵達日，飯店內直接舒適用餐'}],
+  // Day 3 — 輕井澤雪場全日
+  [{ico:'🍜',n:'川上庵',d:'手打蕎麥麵，玩雪前暖胃，熱蕎麥一流'},
+   {ico:'🍵',n:'万平ホテル カフェテラス',d:'百年老飯店，午後下午茶氣氛絕佳'},
+   {ico:'🍽️',n:'飯店晚餐',d:'雪地消耗體力大，飯店內好好補充'}],
+  // Day 4 — 輕井澤→豐洲
+  [{ico:'☕',n:'丸山珈琲',d:'退房前最後一杯，留住輕井澤記憶'},
+   {ico:'🍞',n:'SAWAMURA 外帶',d:'買麵包在車上吃，新幹線午餐'},
+   {ico:'🐟',n:'豐洲市場 海鮮丼',d:'抵達東京後，豐洲市場新鮮海鮮丼'}],
+  // Day 5 — 豐洲・KidZania
+  [{ico:'🐟',n:'豐洲市場',d:'早起可先去市場，海鮮丼超新鮮平價'},
+   {ico:'🍽️',n:'KidZania 場內輕食',d:'午餐在場內解決，不需要出場'},
+   {ico:'🛒',n:'LaLaport Toyosu',d:'晚餐選擇多，日式、拉麵、洋食都有'}],
+  // Day 6 — 成田回程
+  [{ico:'🍱',n:'成田機場 美食街',d:'出發前在機場享用最後一頓日本料理'},
+   {ico:'☕',n:'星乃珈琲（機場店）',d:'等機時來一杯厚鬆餅配咖啡'},
+   {ico:'🍫',n:'伴手禮採購',d:'東京香蕉、ROYCE\'、抹茶點心帶回家'}],
+];
+
+function updateFood(dayIdx){
+  const el=document.getElementById('food-content');if(!el)return;
+  el.innerHTML=FOOD[dayIdx].map(f=>
+    `<div class="irow"><div class="irow-ico">${f.ico}</div><div class="irow-txt"><strong>${f.n}</strong>${f.d}</div></div>`
+  ).join('');
+}
+
+/* State */
+let cur=0,playing=false,timer=null;
+const DUR=6000;
 const ROUTES=[
-  { draw:['r1'], active:'c-tky',  vis:['c-kh'] },
-  { draw:['r2'], active:'c-kiz',  vis:['c-kh','c-tky'] },
-  { draw:[],     active:'c-kiz',  vis:['c-kh','c-tky'] },
-  { draw:['r3'], active:'c-tky',  vis:['c-kh','c-kiz'] },
-  { draw:[],     active:'c-tky',  vis:['c-kh','c-kiz'] },
-  { draw:['r4'], active:'c-kh',   vis:['c-tky','c-kiz'] },
+  {draw:['r1'],active:'c-tky',vis:['c-kh']},
+  {draw:['r2'],active:'c-kiz',vis:['c-kh','c-tky']},
+  {draw:[],active:'c-kiz',vis:['c-kh','c-tky']},
+  {draw:['r3'],active:'c-tky',vis:['c-kh','c-kiz']},
+  {draw:[],active:'c-tky',vis:['c-kh','c-kiz']},
+  {draw:['r4'],active:'c-kh',vis:['c-tky','c-kiz']},
 ];
 
 function animRoute(i){
   const cfg=ROUTES[i];
-  /* cities */
-  document.querySelectorAll('.cdot').forEach(el=>{
-    el.classList.remove('active','vis');
-  });
+  document.querySelectorAll('.cdot').forEach(el=>el.classList.remove('active','vis'));
   cfg.vis.forEach(id=>document.getElementById(id)?.classList.add('vis'));
   document.getElementById(cfg.active)?.classList.add('active');
-
-  /* draw route paths */
   cfg.draw.forEach((rid,j)=>{
-    const el=document.getElementById(rid); if(!el) return;
+    const el=document.getElementById(rid);if(!el)return;
     setTimeout(()=>{
       const len=el.getTotalLength?el.getTotalLength():400;
-      el.style.strokeDasharray=len;
-      el.style.strokeDashoffset=len;
-      el.style.opacity='1';
-      el.getBoundingClientRect(); /* reflow */
-      const dur=Math.min(len/100,2.5);
-      el.style.transition=`stroke-dashoffset ${dur}s ease`;
+      el.style.strokeDasharray=len;el.style.strokeDashoffset=len;el.style.opacity='1';
+      el.getBoundingClientRect();
+      el.style.transition=`stroke-dashoffset ${Math.min(len/100,2.5)}s ease`;
       el.style.strokeDashoffset='0';
     },j*300);
   });
 }
 
 function showPastRoutes(upTo){
-  /* make all previous route segments visible instantly (no animation) */
-  const allIds=['r1','r2','r3','r4'];
-  const shown=new Set();
+  const allIds=['r1','r2','r3','r4'],shown=new Set();
   for(let i=0;i<=upTo;i++) ROUTES[i].draw.forEach(id=>shown.add(id));
   allIds.forEach(id=>{
-    const el=document.getElementById(id); if(!el) return;
+    const el=document.getElementById(id);if(!el)return;
     if(shown.has(id)){
       const len=el.getTotalLength?el.getTotalLength():400;
-      el.style.transition='none';
-      el.style.strokeDasharray=len;
-      el.style.strokeDashoffset='0';
-      el.style.opacity='1';
-    } else {
-      el.style.transition='none';
-      el.style.opacity='0';
-    }
+      el.style.transition='none';el.style.strokeDasharray=len;el.style.strokeDashoffset='0';el.style.opacity='1';
+    } else {el.style.transition='none';el.style.opacity='0';}
   });
 }
 
 function goTo(idx){
-  if(idx<0||idx>5||idx===cur) return;
-  const dir=idx>cur?1:-1;
-  const cards=document.querySelectorAll('.dcard');
-
-  /* exit current — inline styles override previous inline opacity:1 */
+  if(idx<0||idx>5||idx===cur)return;
+  const dir=idx>cur?1:-1,cards=document.querySelectorAll('.dcard');
   const old=cards[cur];
-  old.classList.remove('active');
-  old.classList.add('exiting');
-  old.style.transition='opacity .3s ease, transform .3s ease';
-  old.style.opacity='0';
-  old.style.transform=dir>0?'translateX(-40px)':'translateX(40px)';
-  setTimeout(()=>{ old.classList.remove('exiting'); },350);
-
-  /* routes */
-  if(dir>0){
-    for(let i=cur+1;i<=idx;i++) animRoute(i);
-  } else {
+  old.classList.remove('active');old.classList.add('exiting');
+  old.style.transition='opacity .3s ease,transform .3s ease';
+  old.style.opacity='0';old.style.transform=dir>0?'translateX(-40px)':'translateX(40px)';
+  setTimeout(()=>old.classList.remove('exiting'),350);
+  if(dir>0){for(let i=cur+1;i<=idx;i++)animRoute(i);}
+  else{
     showPastRoutes(idx);
     const cfg=ROUTES[idx];
     document.querySelectorAll('.cdot').forEach(el=>el.classList.remove('active','vis'));
     cfg.vis.forEach(id=>document.getElementById(id)?.classList.add('vis'));
     document.getElementById(cfg.active)?.classList.add('active');
   }
-
   cur=idx;
-
-  /* progress dots */
+  updateFood(cur);
   document.querySelectorAll('.pdot').forEach((d,i)=>{
     d.classList.remove('active','done');
-    if(i<cur) d.classList.add('done');
-    if(i===cur) d.classList.add('active');
+    if(i<cur)d.classList.add('done');
+    if(i===cur)d.classList.add('active');
   });
   document.getElementById('dcnt').textContent=cur+1;
-
-  /* enter new */
   const neo=cards[cur];
   neo.classList.remove('exiting');
-  neo.style.transition='none';
-  neo.style.opacity='0';
-  neo.style.transform=dir>0?'translateX(50px)':'translateX(-50px)';
+  neo.style.transition='none';neo.style.opacity='0';neo.style.transform=dir>0?'translateX(50px)':'translateX(-50px)';
   neo.classList.add('active');
-  neo.getBoundingClientRect(); /* force reflow */
-  neo.style.transition='opacity .42s ease, transform .42s ease';
-  neo.style.opacity='1';
-  neo.style.transform='none';
-
+  neo.getBoundingClientRect();
+  neo.style.transition='opacity .42s ease,transform .42s ease';neo.style.opacity='1';neo.style.transform='none';
   document.getElementById('bprev').disabled=cur===0;
   document.getElementById('bnext').disabled=cur===5;
-  if(cur===5) stopAuto();
+  if(cur===5)stopAuto();
 }
 
-function nextDay(){ goTo(cur+1); }
-function prevDay(){ goTo(cur-1); }
-
-function toggleAuto(){ playing?stopAuto():startAuto(); }
-
-function startAuto(){
-  if(cur>=5) return;
-  playing=true;
-  document.getElementById('bauto').textContent='⏸ 暫停';
-  tick();
-}
+function nextDay(){goTo(cur+1);}
+function prevDay(){goTo(cur-1);}
+function toggleAuto(){playing?stopAuto():startAuto();}
+function startAuto(){if(cur>=5)return;playing=true;document.getElementById('bauto').textContent='⏸ 暫停';tick();}
 function tick(){
-  if(!playing) return;
+  if(!playing)return;
   const f=document.getElementById('apf');
-  f.style.transition='none'; f.style.width='0%';
-  setTimeout(()=>{ f.style.transition=`width ${DUR}ms linear`; f.style.width='100%'; },30);
-  timer=setTimeout(()=>{ if(cur<5){ nextDay(); tick(); } else stopAuto(); },DUR);
+  f.style.transition='none';f.style.width='0%';
+  setTimeout(()=>{f.style.transition=`width ${DUR}ms linear`;f.style.width='100%';},30);
+  timer=setTimeout(()=>{if(cur<5){nextDay();tick();}else stopAuto();},DUR);
 }
 function stopAuto(){
-  playing=false; clearTimeout(timer);
+  playing=false;clearTimeout(timer);
   document.getElementById('bauto').textContent='▶ 自動播放';
-  const f=document.getElementById('apf');
-  f.style.transition='none'; f.style.width='0%';
+  const f=document.getElementById('apf');f.style.transition='none';f.style.width='0%';
 }
-
-/* ── Start ── */
 function startTrip(){
-  const intro=document.getElementById('intro');
-  const main=document.getElementById('main');
+  const intro=document.getElementById('intro'),main=document.getElementById('main');
   intro.classList.add('out');
   setTimeout(()=>{
-    intro.style.display='none';
-    main.classList.add('on');
-    /* Day 1 route after short delay */
-    setTimeout(()=>animRoute(0),700);
+    intro.style.display='none';main.classList.add('on');
+    setTimeout(()=>{ animRoute(0); updateFood(0); },700);
   },1200);
 }
 </script>
